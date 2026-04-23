@@ -28,11 +28,45 @@
             background-color: #4CAF50;
             color: white;
         }
+
+        /* LIST */
+        ul {
+            width: 60%;
+            margin: 20px auto;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            background: #f2f2f2;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        /* CARD */
+        .card-container {
+            width: 60%;
+            margin: 20px auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 120px;
+            text-align: center;
+            border-radius: 8px;
+            background: #fafafa;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
 
-    <h2>Data Mahasiswa</h2>
+    <h2>Data Mahasiswa (Table)</h2>
     <table>
         <thead>
             <tr>
@@ -43,7 +77,7 @@
         <tbody id="table-mahasiswa"></tbody>
     </table>
 
-    <h2>Data Dosen</h2>
+    <h2>Data Dosen (Table)</h2>
     <table>
         <thead>
             <tr>
@@ -54,22 +88,31 @@
         <tbody id="table-dosen"></tbody>
     </table>
 
+    <h2>Data Mahasiswa (List)</h2>
+    <ul id="list-mahasiswa"></ul>
+
+    <h2>Data Dosen (List)</h2>
+    <ul id="list-dosen"></ul>
+
+    <h2>Data Mahasiswa (Card)</h2>
+    <div class="card-container" id="card-mahasiswa"></div>
+
+    <h2>Data Dosen (Card)</h2>
+    <div class="card-container" id="card-dosen"></div>
+
     <script>
-        // Data 1
         const mahasiswa = [
             { id: 1, nama: "Andi" },
             { id: 2, nama: "Budi" },
             { id: 3, nama: "Citra" }
         ];
 
-        // Data 2 (struktur sama)
         const dosen = [
             { id: 101, nama: "Pak Joko" },
             { id: 102, nama: "Bu Sari" },
             { id: 103, nama: "Pak Rudi" }
         ];
 
-        // Fungsi reusable (tetap DRY)
         function renderTable(data, targetId) {
             const tableBody = document.getElementById(targetId);
             tableBody.innerHTML = "";
@@ -84,9 +127,39 @@
             });
         }
 
-        // Pemanggilan (modular & scalable)
+        function renderList(data, targetId) {
+            const list = document.getElementById(targetId);
+            list.innerHTML = "";
+
+            data.forEach(item => {
+                list.innerHTML += `
+                    <li>${item.id} - ${item.nama}</li>
+                `;
+            });
+        }
+
+        function renderCard(data, targetId) {
+            const container = document.getElementById(targetId);
+            container.innerHTML = "";
+
+            data.forEach(item => {
+                container.innerHTML += `
+                    <div class="card">
+                        <h4>${item.nama}</h4>
+                        <p>ID: ${item.id}</p>
+                    </div>
+                `;
+            });
+        }
+
         renderTable(mahasiswa, "table-mahasiswa");
         renderTable(dosen, "table-dosen");
+
+        renderList(mahasiswa, "list-mahasiswa");
+        renderList(dosen, "list-dosen");
+
+        renderCard(mahasiswa, "card-mahasiswa");
+        renderCard(dosen, "card-dosen");
     </script>
 
 </body>
