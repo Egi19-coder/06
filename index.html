@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -34,7 +33,6 @@
 <body>
 
     <h2>Data Mahasiswa</h2>
-
     <table>
         <thead>
             <tr>
@@ -42,22 +40,38 @@
                 <th>Nama</th>
             </tr>
         </thead>
-        <tbody id="data-table">
-            <!-- Data dari JS masuk sini -->
-        </tbody>
+        <tbody id="table-mahasiswa"></tbody>
+    </table>
+
+    <h2>Data Dosen</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+            </tr>
+        </thead>
+        <tbody id="table-dosen"></tbody>
     </table>
 
     <script>
-        // Data JSON
-        const data = [
+        // Data 1
+        const mahasiswa = [
             { id: 1, nama: "Andi" },
             { id: 2, nama: "Budi" },
             { id: 3, nama: "Citra" }
         ];
 
-        // Fungsi render (DRY & reusable)
-        function renderTable(data) {
-            const tableBody = document.getElementById("data-table");
+        // Data 2 (struktur sama)
+        const dosen = [
+            { id: 101, nama: "Pak Joko" },
+            { id: 102, nama: "Bu Sari" },
+            { id: 103, nama: "Pak Rudi" }
+        ];
+
+        // Fungsi reusable (tetap DRY)
+        function renderTable(data, targetId) {
+            const tableBody = document.getElementById(targetId);
             tableBody.innerHTML = "";
 
             data.forEach(item => {
@@ -70,10 +84,10 @@
             });
         }
 
-        // Panggil fungsi
-        renderTable(data);
+        // Pemanggilan (modular & scalable)
+        renderTable(mahasiswa, "table-mahasiswa");
+        renderTable(dosen, "table-dosen");
     </script>
 
 </body>
 </html>
-```
